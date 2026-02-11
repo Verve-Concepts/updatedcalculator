@@ -417,7 +417,7 @@
                 <div class="result-value" id="dcr">0</div>
             </div>
 
-            <div class="result-item">
+            <div class="result-item" style="display: none;">
                 <div>
                     <div class="result-label">Base Score</div>
                     <div class="formula">Score = Ws1 × SCR + Wd × DCR</div>
@@ -428,7 +428,7 @@
             <div class="result-item">
                 <div>
                     <div class="result-label">Main Score (MS)</div>
-                    <div class="formula">MS = Score × log(1 + Sign-ups + Donations)</div>
+                    <div class="formula">MS = Ws1 × SCR + Wd × DCR</div>
                 </div>
                 <div class="result-value" id="ms">0</div>
             </div>
@@ -577,7 +577,7 @@
             const score = ws1 * scr + wd * dcr;
 
             // Calculate Main Score (MS)
-            const ms = score * Math.log(1 + signups + donations);
+            const ms = ws1 * scr + wd * dcr;
 
             // Calculate Main Score Expanded (MSE)
             const mse = ms * 100;
