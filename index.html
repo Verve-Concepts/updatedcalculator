@@ -404,7 +404,7 @@
             <div class="result-item">
                 <div>
                     <div class="result-label">Sign-up Conversion Rate (SCR)</div>
-                    <div class="formula">SCR = (Sign-ups + α) / (Sign-ups + Clicks + α + β)</div>
+                    <div class="formula">SCR = ((Sign-ups + α) / (Clicks + α + β))²</div>
                 </div>
                 <div class="result-value" id="scr">0</div>
             </div>
@@ -412,7 +412,7 @@
             <div class="result-item">
                 <div>
                     <div class="result-label">Donation Conversion Rate (DCR)</div>
-                    <div class="formula">DCR = (Donations + α) / (Donations + Sign-ups + α + β)</div>
+                    <div class="formula">DCR = ((Donations + α) / (Sign-ups + α + β))²</div>
                 </div>
                 <div class="result-value" id="dcr">0</div>
             </div>
@@ -428,7 +428,7 @@
             <div class="result-item">
                 <div>
                     <div class="result-label">Main Score (MS)</div>
-                    <div class="formula">MS = (Ws1 × SCR + Wd × DCR) × ln(1 + Sign-ups + Donations)</div>
+                    <div class="formula">MS = (Ws1 × SCR + Wd × DCR) × (1 + Sign-ups + Donations)</div>
                 </div>
                 <div class="result-value" id="ms">0</div>
             </div>
@@ -436,7 +436,7 @@
             <div class="result-item">
                 <div>
                     <div class="result-label">Main Score Expanded (MSE)</div>
-                    <div class="formula">MSE = MS × 100</div>
+                    <div class="formula">MSE = [(Ws1 × SCR + Wd × DCR) × (1 + Sign-ups + Donations)] × 100</div>
                 </div>
                 <div class="result-value" id="mse">0</div>
             </div>
@@ -567,17 +567,17 @@
             const c2 = signups > 0 ? s2signups / signups : 0;
             const c3 = s2signups > 0 ? s3signups / s2signups : 0;
 
-            // Calculate SCR (Sign-up Conversion Rate) with smoothing
-            const scr = (signups + alpha) / (signups + clicks + alpha + beta);
+            // Calculate SCR (Sign-up Conversion Rate) with smoothing, squared
+            const scr = Math.pow((signups + alpha) / (clicks + alpha + beta), 2);
 
-            // Calculate DCR (Donation Conversion Rate) with smoothing
-            const dcr = (donations + alpha) / (donations + signups + alpha + beta);
+            // Calculate DCR (Donation Conversion Rate) with smoothing, squared
+            const dcr = Math.pow((donations + alpha) / (signups + alpha + beta), 2);
 
             // Calculate Base Score
             const score = ws1 * scr + wd * dcr;
 
-            // Calculate Main Score (MS) with logarithmic participation scaling
-            const ms = score * Math.log(1 + signups + donations);
+            // Calculate Main Score (MS)
+            const ms = score * (1 + signups + donations);
 
             // Calculate Main Score Expanded (MSE)
             const mse = ms * 100;
