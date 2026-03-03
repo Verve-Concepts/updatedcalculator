@@ -427,7 +427,7 @@
             <div class="result-item">
                 <div>
                     <div class="result-label">Main Score (MS)</div>
-                    <div class="formula">MS = [(Ws1 × SCR × 100)² + (Wd × DCR × 100)]^1.5 × (1 + Sign-ups + Donations)</div>
+                    <div class="formula">MS = [(Ws1 × SCR × 100) + (Wd × DCR × 100)]^1.5 × (1 + Sign-ups + Donations)</div>
                 </div>
                 <div class="result-value" id="ms">0</div>
             </div>
@@ -435,7 +435,7 @@
             <div class="result-item">
                 <div>
                     <div class="result-label">Main Score Expanded (MSE)</div>
-                    <div class="formula">MSE = [(Ws1 × SCR × 100)² + (Wd × DCR × 100)]^1.5 × (1 + Sign-ups + Donations) × 100</div>
+                    <div class="formula">MSE = [(Ws1 × SCR × 100) + (Wd × DCR × 100)]^1.5 × (1 + Sign-ups + Donations) × 100</div>
                 </div>
                 <div class="result-value" id="mse">0</div>
             </div>
@@ -575,8 +575,8 @@
             // Calculate Base Score
             const score = ws1 * scr + wd * dcr;
 
-            // Calculate Main Score (MS): [(Ws1×SCR×100)² + (Wd×DCR×100)]^1.5 × (1 + Sign-ups + Donations)
-            const ms = Math.pow(Math.pow(ws1 * scr * 100, 2) + (wd * dcr * 100), 1.5) * (1 + signups + donations);
+            // Calculate Main Score (MS): [(Ws1×SCR×100) + (Wd×DCR×100)]^1.5 × (1 + Sign-ups + Donations)
+            const ms = Math.pow((ws1 * scr * 100) + (wd * dcr * 100), 1.5) * (1 + signups + donations);
 
             // Calculate Main Score Expanded (MSE)
             const mse = ms * 100;
